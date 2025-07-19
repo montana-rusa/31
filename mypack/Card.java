@@ -5,8 +5,8 @@ public class Card {
     public String suit;
     public String rank;
 
-    public Card(String suit, String value) {
+    public Card(String suit, String rank) {
         this.suit = suit;
-        this.value = value;
-    }
-}
+        this.rank = rank;
+    } }
+
