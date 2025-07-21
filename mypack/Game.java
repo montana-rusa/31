@@ -79,7 +79,7 @@ public class Game {
         for (int i = 0; i < 3; i++) {
             card = middle_cards[i];
             System.out.println(Integer.toString(i+1) + ". " + card.rank + card.suit); }
-        System.out.println(""); }
+        System.out.println(""); } 
 
     public void run() {
         build_deck();
@@ -103,6 +103,10 @@ public class Game {
         System.out.println("End of game. Final cards:");
         for (Player p: players) {
                 System.out.println(p.name + "'s cards:");
-                p.print_cards(); } } }
+                p.print_cards(); 
+                System.out.println("Final score: " + Integer.toString(p.calculate_score(suits))); 
+                System.out.println(); } } 
+            
+            }
 
 
