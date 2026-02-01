@@ -7,6 +7,11 @@ public class Com extends Player {
         super(initialCards);
     }
 
-    
+    bestMove(Card[] hand, Card[] middle) {
+        // Logic for computer's best move goes here
+
+        
+
+    }
     
 }
