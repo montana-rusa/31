@@ -1,5 +1,7 @@
 package mypack;
 
+import java.util.*;
+
 public class Player {
 
     //declaring variables
@@ -17,10 +19,25 @@ public class Player {
     }
 
     int getHandValue(Card[] hand) {
+
+        String[] suits = {"HEARTS", "DIAMONDS", "CLUBS", "SPADES"};
+
+        int suitValue;
         int totalValue = 0;
-        for (Card card : hand) {
-            totalValue += card.values.get(card.rank);
+        for (String suit : suits) {
+            suitValue = 0;
+
+            for (Card card : hand) {
+                if (card.suit == suit) {
+                    suitValue += card.values.get(card.rank);
+                }
+            }
+
+            if (suitValue > totalValue) {
+                totalValue = suitValue;
+           }
         }
+
         return totalValue;
     }
 }
