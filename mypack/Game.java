@@ -5,6 +5,9 @@ import java.util.*;
 public class Game {
 
     Scanner scanner = new Scanner(System.in);
+    boolean stick = false;
+
+
 
     // Deal initial cards to player and computers
     private static Card[] dealCards(Deck deck, int count) {
@@ -28,6 +31,7 @@ public class Game {
     boolean swap(Player player, Com com1, Com com2, Com com3, Card[] middle, Deck deck) {
         Integer swap1, swap2;
         String input;
+        boolean comStick;
 
         
         System.out.println("\nMiddle Cards:");
@@ -44,14 +48,30 @@ public class Game {
                 System.out.println("Invalid input. Please enter 1, 2, 3, or 0."); } }
         if (input.equals("0")) {
             System.out.println("You chose to stick with your current hand.");
+            stick = true;
 
             for (Com com : Arrays.asList(com1, com2, com3)) {
-                comSwap(com, middle, deck);
-            }
+                comStick = com.get_stick();
+                System.out.println(comStick);
+
+                if (comStick) {
+                    stick = true;
+                }
+                else {
+
+                    if (!stick) {
+                        comSwap(com, middle, deck);
+                    }
+                    
+                    comStick = com.get_stick();
+                    if (comStick) {
+                        System.out.println("Computer " + (Arrays.asList(com1, com2, com3).indexOf(com) + 1) + " has chosen to stick.");
+                    }   
+            } }
             System.out.println( "\nThe computers have made their moves.");
 
 
-            return true;
+            return stick;
          } else {
             swap1 = Integer.parseInt(input) - 1; 
 
@@ -71,12 +91,30 @@ public class Game {
             System.out.println("\nYour new hand:");
             player.printHand(); }
 
+        
+
         for (Com com : Arrays.asList(com1, com2, com3)) {
-                comSwap(com, middle, deck);
-            }
+            comStick = com.get_stick();
+                System.out.println(comStick);
+
+                if (comStick) {
+                    stick = true;
+                }
+                else {
+
+                    if (!stick) {
+                        comSwap(com, middle, deck);
+                    }
+                    
+                    comStick = com.get_stick();
+                    if (comStick) {
+                        System.out.println("Computer " + (Arrays.asList(com1, com2, com3).indexOf(com) + 1) + " has chosen to stick.");
+                    }   
+            } }
+
         System.out.println( "\nThe computers have made their moves.");
 
-        return false;
+        return stick;
     }
 
     void winner(Player player, Com com1, Com com2, Com com3) {
@@ -93,7 +131,6 @@ public class Game {
     }
 
     void startGame() {
-        boolean stick = false;
         Deck deck = new Deck();
 
         Player player = new Player(dealCards(deck, 3));
@@ -107,6 +144,7 @@ public class Game {
         player.printHand();
 
         while (!(stick)) {
+
             stick = swap(player, com1, com2, com3, middle, deck);
         }
 

@@ -4,6 +4,16 @@ import java.util.*;
 
 public class Com extends Player {
 
+    boolean stick = false;
+
+    void set_stick(boolean newStick) {
+        stick = newStick;
+    }
+
+    boolean get_stick() {
+        return stick;
+    }
+
     //constructor method
     Com(Card[] initialCards) {
         super(initialCards);
@@ -28,14 +38,15 @@ public class Com extends Player {
                 Integer bestValue = Collections.max(handValues.values());
                 for (Integer[] key : handValues.keySet()) {
                     if (handValues.get(key) == bestValue) {
+                        if (key.length == 1) {
+                            set_stick(true);
+                        }
                         return key;
                     }
                 }
+                
                 return options[0]; // Default return if no best move found
             }
-
-
-
     }
     
-
+    // 
